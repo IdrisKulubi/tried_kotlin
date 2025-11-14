@@ -11,7 +11,7 @@ import com.example.bakerysystem.AppViewModelFactory
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-f
+
     private val authViewModel: AuthViewModel by viewModels {
         val app = application as BakeryApplication
         AppViewModelFactory(app.repository)
