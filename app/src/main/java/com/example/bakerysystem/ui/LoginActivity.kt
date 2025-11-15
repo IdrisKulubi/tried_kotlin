@@ -30,8 +30,10 @@ class LoginActivity : AppCompatActivity() {
         authViewModel.authStatus.observe(this) { status ->
             if (status == "Login Success") {
                 Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                // Navigate to Menu List
-                startActivity(Intent(this, MenuListActivity::class.java))
+                // Navigate to HomeActivity
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
                 finish()
             } else if (status.startsWith("Error")) {
                 Toast.makeText(this, status, Toast.LENGTH_LONG).show()

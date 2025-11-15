@@ -2,6 +2,7 @@ package com.example.bakerysystem
 
 import android.app.Application
 import com.example.bakerysystem.data.AppDatabase
+import com.example.bakerysystem.data.AppRepository
 
 /**
  * Application class to initialize Room Database components only once
@@ -16,6 +17,6 @@ class BakeryApplication : Application() { // <--- This 'extends' android.app.App
     // Lazy initialization of the Repository
     // The repository needs the DAO, which comes from the database.
     val repository by lazy {
-        com.example.bakerysystem.data.AppRepository(database.appDao())
+        AppRepository(database.appDao(), applicationContext)
     }
 }
