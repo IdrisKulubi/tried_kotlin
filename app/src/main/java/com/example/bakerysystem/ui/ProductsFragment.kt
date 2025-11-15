@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bakerysystem.AppViewModelFactory
 import com.example.bakerysystem.BakeryApplication
 import com.example.bakerysystem.R
+import com.example.bakerysystem.data.MenuItemEntity // Added this import
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ProductsFragment : Fragment(), ProductsAdapter.OnItemClickListener {

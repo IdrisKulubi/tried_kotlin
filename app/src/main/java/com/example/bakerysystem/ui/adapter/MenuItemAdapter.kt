@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bakerysystem.data.MenuItemEntity // Added this import
 import com.example.bakerysystem.databinding.ItemMenuItemBinding
 
 /**

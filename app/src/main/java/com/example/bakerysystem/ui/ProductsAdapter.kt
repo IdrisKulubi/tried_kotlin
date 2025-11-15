@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bakerysystem.R
+import com.example.bakerysystem.data.MenuItemEntity // Added this import
 
 class ProductsAdapter(private val products: List<MenuItemEntity>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
 
