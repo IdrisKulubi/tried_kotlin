@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     // Get the ViewModel using the custom Factory
     private val authViewModel: AuthViewModel by viewModels {
         val app = application as BakeryApplication
-        AppViewModelFactory(app.repository)
+        AppViewModelFactory(app.appRepository, app.cartRepository) // Pass both repositories
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +30,12 @@ class LoginActivity : AppCompatActivity() {
         authViewModel.authStatus.observe(this) { status ->
             if (status == "Login Success") {
                 Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                // Navigate to Menu List
-                startActivity(Intent(this, MenuListActivity::class.java))
+                val email = binding.etEmail.text.toString()
+                // Navigate to Main Activity and pass the user's email
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("USER_EMAIL", email)
+                }
+                startActivity(intent)
                 finish()
             } else if (status.startsWith("Error")) {
                 Toast.makeText(this, status, Toast.LENGTH_LONG).show()

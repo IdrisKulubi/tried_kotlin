@@ -12,9 +12,13 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: AppRepository) : ViewModel() {
 
-    // Status LiveData to inform the UI about success/failure (LiveData concept)
+    // Status LiveData to inform the UI about success/failure
     private val _authStatus = MutableLiveData<String>()
     val authStatus: LiveData<String> = _authStatus
+
+    // LiveData to hold the currently logged-in user
+    private val _currentUser = MutableLiveData<UserEntity?>()
+    val currentUser: LiveData<UserEntity?> = _currentUser
 
     fun register(email: String, username: String, passwordRaw: String) = viewModelScope.launch(Dispatchers.IO) {
         if (email.isBlank() || username.isBlank() || passwordRaw.isBlank()) {
@@ -28,13 +32,10 @@ class AuthViewModel(private val repository: AppRepository) : ViewModel() {
             passwordHash = passwordRaw.trim()
         )
 
-        Log.d("REGISTER_DEBUG", "Registering user: $newUser") // <- debug
-
         try {
             repository.registerUser(newUser)
             _authStatus.postValue("Registration Success")
         } catch (e: Exception) {
-            Log.e("REGISTER_DEBUG", "Error inserting user", e)
             _authStatus.postValue("Error: User already exists or database issue.")
         }
     }
@@ -47,16 +48,21 @@ class AuthViewModel(private val repository: AppRepository) : ViewModel() {
 
         val user = repository.loginUser(email.trim())
 
-        // Debug logs to check what is happening
-        Log.d("LOGIN_DEBUG", "User from DB: $user")
-        Log.d("LOGIN_DEBUG", "Password entered: '$passwordRaw'")
-        Log.d("LOGIN_DEBUG", "Password stored: '${user?.passwordHash}'")
-
         if (user != null && user.passwordHash == passwordRaw) {
+            _currentUser.postValue(user) // Set the current user on successful login
             _authStatus.postValue("Login Success")
         } else {
             _authStatus.postValue("Error: Invalid email or password.")
         }
     }
 
+    // New function to load user data
+    fun loadUserByEmail(email: String) = viewModelScope.launch(Dispatchers.IO) {
+        val user = repository.loginUser(email.trim())
+        _currentUser.postValue(user)
+    }
+
+    fun logout() {
+        _currentUser.postValue(null)
+    }
 }
