@@ -19,6 +19,9 @@ interface AppDao {
     @Query("SELECT * FROM users WHERE email = :email")
     suspend fun getUserByEmail(email: String): UserEntity?
 
+    @Query("SELECT * FROM users WHERE id = :userId")
+    fun getUserById(userId: Int): Flow<UserEntity?>
+
     // --- Menu Item Operations (CRUD) ---
 
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
