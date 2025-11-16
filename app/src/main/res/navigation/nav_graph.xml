@@ -17,4 +17,10 @@
         android:label="CartFragment"
         tools:layout="@layout/fragment_cart" />
 
+    <fragment
+        android:id="@+id/userAccountFragment"
+        android:name="com.example.bakerysystem.ui.UserAccountFragment"
+        android:label="UserAccountFragment"
+        tools:layout="@layout/fragment_user_account" />
+
 </navigation>

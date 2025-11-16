@@ -30,8 +30,12 @@ class LoginActivity : AppCompatActivity() {
         authViewModel.authStatus.observe(this) { status ->
             if (status == "Login Success") {
                 Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                // Navigate to Main Activity
-                startActivity(Intent(this, MainActivity::class.java))
+                val email = binding.etEmail.text.toString()
+                // Navigate to Main Activity and pass the user's email
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("USER_EMAIL", email)
+                }
+                startActivity(intent)
                 finish()
             } else if (status.startsWith("Error")) {
                 Toast.makeText(this, status, Toast.LENGTH_LONG).show()
