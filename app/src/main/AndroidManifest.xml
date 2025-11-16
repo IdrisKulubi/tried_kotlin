@@ -23,8 +23,8 @@
 
         <!-- Other activities must be listed -->
         <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.MenuListActivity" />
         <activity android:name=".ui.AddItemActivity" />
+        <activity android:name=".ui.MainActivity" />
 
     </application>
 
