@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +39,16 @@ class CartFragment : Fragment() {
 
         setupRecyclerView()
         setupObservers()
+
+        binding.btnCheckout.setOnClickListener {
+            // Check if cart is not empty before proceeding
+            if (cartViewModel.allCartItems.value?.isNotEmpty() == true) {
+                cartViewModel.deleteAllCartItems()
+                Toast.makeText(requireContext(), "Purchase successful!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Your cart is empty.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -57,6 +68,8 @@ class CartFragment : Fragment() {
         cartViewModel.allCartItems.observe(viewLifecycleOwner) { items ->
             cartItemAdapter.submitList(items)
             binding.rvCartItems.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+            // Disable checkout button if cart is empty
+            binding.btnCheckout.isEnabled = items.isNotEmpty()
         }
 
         cartViewModel.totalPrice.observe(viewLifecycleOwner) { total ->

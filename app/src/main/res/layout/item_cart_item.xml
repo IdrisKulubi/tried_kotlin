@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="8dp"
@@ -19,10 +20,10 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="Croissant"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_cart_item_price" />
+            app:layout_constraintEnd_toStartOf="@+id/tv_cart_item_price"
+            tools:text="Croissant" />
 
         <TextView
             android:id="@+id/tv_cart_item_price"
@@ -30,10 +31,10 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="$2.50"
             android:textColor="@color/design_default_color_primary"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="$2.50" />
 
         <TextView
             android:id="@+id/tv_cart_item_quantity"
@@ -42,40 +43,46 @@
             android:text="Quantity: 1"
             app:layout_constraintTop_toBottomOf="@id/tv_cart_item_name"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="8dp" />
 
-        <ImageButton
-            android:id="@+id/btn_increase_quantity"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_input_add"
-            android:contentDescription="Increase Quantity"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintEnd_toStartOf="@+id/btn_decrease_quantity"
-            app:layout_constraintTop_toTopOf="@id/tv_cart_item_quantity"
-            app:layout_constraintBottom_toBottomOf="@id/tv_cart_item_quantity" />
-
-        <ImageButton
-            android:id="@+id/btn_decrease_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:contentDescription="Decrease Quantity"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintEnd_toStartOf="@+id/btn_remove_item"
-            app:layout_constraintTop_toTopOf="@id/tv_cart_item_quantity"
-            app:layout_constraintBottom_toBottomOf="@id/tv_cart_item_quantity" />
-
-        <ImageButton
-            android:id="@+id/btn_remove_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_delete"
-            android:contentDescription="Remove Item"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_cart_item_quantity"
-            app:layout_constraintBottom_toBottomOf="@id/tv_cart_item_quantity" />
+            app:layout_constraintTop_toBottomOf="@id/tv_cart_item_price"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btn_decrease_quantity"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="-"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:contentDescription="Decrease Quantity"/>
+
+            <ImageButton
+                android:id="@+id/btn_increase_quantity"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_input_add"
+                android:contentDescription="Increase Quantity"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <ImageButton
+                android:id="@+id/btn_remove_item"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:src="@android:drawable/ic_delete"
+                android:contentDescription="Remove Item"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
