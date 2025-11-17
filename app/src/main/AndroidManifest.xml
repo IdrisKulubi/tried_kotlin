@@ -11,8 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BakerySystem">
 
+        <!-- Make sure LoginActivity is the launch activity -->
         <activity
-            android:name=".ui.WelcomeActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,11 +21,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.HomeActivity" />
-        <activity android:name=".ui.LoginActivity" />
+        <!-- Other activities must be listed -->
         <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.MenuListActivity" />
         <activity android:name=".ui.AddItemActivity" />
+        <activity android:name=".ui.MainActivity" />
 
     </application>
 

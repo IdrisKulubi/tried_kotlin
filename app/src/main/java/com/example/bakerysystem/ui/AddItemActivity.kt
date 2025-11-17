@@ -8,8 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bakerysystem.AppViewModelFactory
 import com.example.bakerysystem.BakeryApplication
-import com.example.bakerysystem.R
-import com.example.bakerysystem.data.MenuItemEntity // Added this import
+import com.example.bakerysystem.data.MenuItemEntity
 import com.example.bakerysystem.databinding.ActivityAddItemBinding
 
 class AddItemActivity : AppCompatActivity() {
@@ -21,7 +20,7 @@ class AddItemActivity : AppCompatActivity() {
 
     private val menuViewModel: MenuViewModel by viewModels {
         val app = application as BakeryApplication
-        AppViewModelFactory(app.repository)
+        AppViewModelFactory(app.appRepository, app.cartRepository) // Pass both repositories
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,11 +76,11 @@ class AddItemActivity : AppCompatActivity() {
                 selectedImageUri = Uri.parse(imageUriStr)
                 binding.ivItemImage.setImageURI(selectedImageUri)
             } else {
-                binding.ivItemImage.setImageResource(R.drawable.ic_placeholder)
+                binding.ivItemImage.setImageResource(com.example.bakerysystem.R.drawable.ic_placeholder)
             }
         } else {
             // New item
-            binding.ivItemImage.setImageResource(R.drawable.ic_placeholder)
+            binding.ivItemImage.setImageResource(com.example.bakerysystem.R.drawable.ic_placeholder)
         }
     }
 

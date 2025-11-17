@@ -14,7 +14,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private val authViewModel: AuthViewModel by viewModels {
         val app = application as BakeryApplication
-        AppViewModelFactory(app.repository)
+        AppViewModelFactory(app.appRepository, app.cartRepository) // Updated to pass both repositories
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

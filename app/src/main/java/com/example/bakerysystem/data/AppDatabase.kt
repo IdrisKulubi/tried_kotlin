@@ -8,14 +8,16 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [
         UserEntity::class,
-        MenuItemEntity::class
+        MenuItemEntity::class,
+        CartItemEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
+    abstract fun cartItemDao(): CartItemDao
 
     companion object {
         @Volatile
@@ -28,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "bakery_database"
                 )
-                .fallbackToDestructiveMigration() // Added this line
+                .fallbackToDestructiveMigration() // Added for schema changes
                 .build()
                 INSTANCE = instance
                 instance

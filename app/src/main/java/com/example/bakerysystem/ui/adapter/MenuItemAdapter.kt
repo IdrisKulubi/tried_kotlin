@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bakerysystem.data.MenuItemEntity // Added this import
+import com.example.bakerysystem.data.MenuItemEntity
 import com.example.bakerysystem.databinding.ItemMenuItemBinding
 
 /**
@@ -14,7 +14,8 @@ import com.example.bakerysystem.databinding.ItemMenuItemBinding
  */
 class MenuItemAdapter(
     private val onItemClick: (MenuItemEntity) -> Unit,
-    private val onDeleteClick: (MenuItemEntity) -> Unit
+    private val onDeleteClick: (MenuItemEntity) -> Unit,
+    private val onAddToCartClick: (MenuItemEntity) -> Unit
 ) : ListAdapter<MenuItemEntity, MenuItemAdapter.ItemViewHolder>(MenuItemDiffCallback()) {
 
     // Inner class for the ViewHolder
@@ -37,6 +38,11 @@ class MenuItemAdapter(
                 // Delete button listener
                 btnDelete.setOnClickListener {
                     onDeleteClick(item)
+                }
+
+                // Add to Cart button listener
+                btnAddToCart.setOnClickListener {
+                    onAddToCartClick(item)
                 }
             }
         }
